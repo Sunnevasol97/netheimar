@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8">
+  <title>Netheimar – bókalesari</title>
+  <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #fff0f4;
+      font-family: sans-serif;
+    }
+    #viewer {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewer">Hleð bókinni...</div>
+
+  <script>
+    const viewer = document.getElementById("viewer");
+    const book = ePub("./Netheimar.epub");
+
+    const rendition = book.renderTo(viewer, {
+      width: "100%",
+      height: "100%"
+    });
+
+    rendition.display();
+
+    book.ready.then(() => {
+      console.log("Bókin er hlaðin!");
+    }).catch(err => {
+      viewer.innerHTML = "Tókst ekki að hlaða bókinni 😞";
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
